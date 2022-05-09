@@ -3,83 +3,47 @@
 @section('content')
 <div class="content-wrapper">
     <div class="row">
-        <div class="col-md-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-title mb-0">Data Courses</p>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-borderless">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Search Engine Marketing</td>
-                                    <td class="font-weight-bold">$362</td>
-                                    <td>21 Sep 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-success">Completed</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Search Engine Optimization</td>
-                                    <td class="font-weight-bold">$116</td>
-                                    <td>13 Jun 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-success">Completed</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Display Advertising</td>
-                                    <td class="font-weight-bold">$551</td>
-                                    <td>28 Sep 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-warning">Pending</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Pay Per Click Advertising</td>
-                                    <td class="font-weight-bold">$523</td>
-                                    <td>30 Jun 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-warning">Pending</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>E-Mail Marketing</td>
-                                    <td class="font-weight-bold">$781</td>
-                                    <td>01 Nov 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-danger">Cancelled</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Referral Marketing</td>
-                                    <td class="font-weight-bold">$283</td>
-                                    <td>20 Mar 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-warning">Pending</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Social media marketing</td>
-                                    <td class="font-weight-bold">$897</td>
-                                    <td>26 Oct 2018</td>
-                                    <td class="font-weight-medium">
-                                        <div class="badge badge-success">Completed</div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+        <div class="col-md-12 grid-margin">
+            <div class="row">
+                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                    <h3 class="font-weight-bold">Data Courses</h3>
+                    <h6 class="font-weight-normal mb-0">There are {{ $course_total }} courses available!</h6>
+                </div>
+                <div class="col-12 col-xl-4">
+                    <div class="justify-content-end d-flex">
+                        <div class="flex-md-grow-1 flex-xl-grow-0">
+                            <a href="{{ route('courses.create') }}" class="btn btn-primary">
+                                Tambah Course Baru
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        @foreach ($courses as $course)
+            <div class="col-md-4 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex flex-row flex-wrap text-center text-sm-left align-items-center">
+                            <img src="{{ asset('storage/' . $course->thumbnail) }}" class="img-xl rounded" alt="profile image">
+                            <div class="ms-sm-3 ms-md-0 ms-xl-5 mt-2 mt-sm-0 mt-md-3 mt-xl-3">
+                                <h6 class="mb-1"><a href="{{ route('courses.show', $course->id) }}" style="text-decoration: none">{{ $course->title }}</a></h6>
+                                <p class="text-muted mb-2">{{ $course->creator }}</p>
+                                <p class="mb-3 text-success font-weight-bold fs-5">Rp {{ number_format($course->price, 0, ',', '.') }}</p>
+                                <a href="{{ route('courses.edit', $course->id) }}" class="btn btn-sm btn-outline-primary"> Edit </a> 
+                                <form action="{{ route('courses.destroy', $course->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="#" class="btn btn-sm btn-outline-danger" onclick="this.closest('form').submit();return false;"> Delete </a> 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 </div>
 @endsection

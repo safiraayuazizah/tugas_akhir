@@ -13,7 +13,7 @@
             </a>
         </li>
         <li class="nav-item {{ Request::segment(1) === 'courses' ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('courses') }}">
+            <a class="nav-link" href="{{ route('courses.index') }}">
                 <i class="icon-ribbon menu-icon"></i>
                 <span class="menu-title">Data Courses</span>
             </a>

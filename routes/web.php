@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,9 +28,7 @@ Route::get('/dashboard', function() {
 Route::get('/about_us', function() {
     return view('admin.about_us');
 })->name('about_us');
-Route::get('/courses', function() {
-    return view('admin.courses.index');
-})->name('courses');
+Route::resource('courses', CourseController::class);
 Route::get('/customers', function() {
     return view('admin.customers.index');
 })->name('customers');
