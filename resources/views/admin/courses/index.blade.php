@@ -26,9 +26,9 @@
             <div class="col-md-4 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <div class="d-sm-flex flex-row flex-wrap text-center text-sm-left align-items-center">
+                        <div class="d-sm-flex flex-row text-center text-sm-left align-items-center">
                             <img src="{{ asset('storage/' . $course->thumbnail) }}" class="img-xl rounded" alt="profile image">
-                            <div class="ms-sm-3 ms-md-0 ms-xl-5 mt-2 mt-sm-0 mt-md-3 mt-xl-3">
+                            <div class="ms-sm-3 ms-md-0 ms-xl-4 mt-2 mt-sm-0 mt-md-3 mt-xl-0">
                                 <h6 class="mb-1"><a href="{{ route('courses.show', $course->id) }}" style="text-decoration: none">{{ $course->title }}</a></h6>
                                 <p class="text-muted mb-2">{{ $course->creator }}</p>
                                 <p class="mb-3 text-success font-weight-bold fs-5">Rp {{ number_format($course->price, 0, ',', '.') }}</p>
