@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'gender',
+        'phone_number',
+        'date_of_birth',
     ];
 
     /**
@@ -41,4 +45,36 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isAdmin()
+    {
+        if($this->role == 'admin')
+        { 
+            return true; 
+        } 
+        else 
+        { 
+            return false; 
+        }
+    }
+
+    public function isCustomer()
+    {
+        if($this->role == 'customer')
+        { 
+            return true; 
+        } 
+        else 
+        { 
+            return false; 
+        }
+    }
+
+    public function hasRole($role) {
+        switch ($role) {
+            case 'admin': return \Auth::user()->isAdmin();
+            case 'customer': return \Auth::user()->isCustomer();
+        }
+        return false;
+    }
 }

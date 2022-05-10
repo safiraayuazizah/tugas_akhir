@@ -19,7 +19,19 @@
                         <li class="nav-item {{ Request::segment(1) === null ? 'active' : '' }}"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
                         <li class="nav-item {{ Request::segment(1) === 'about-us' ? 'active' : '' }}"><a class="nav-link" href="{{ route('about-us') }}">About Us</a></li>
                         <li class="nav-item {{ Request::segment(1) === 'contact' ? 'active' : '' }}"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                        <li class="nav-item">
+                            @auth
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                            @endauth
+                            @guest
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            @endguest
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item">

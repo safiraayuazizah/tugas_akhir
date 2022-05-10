@@ -11,8 +11,8 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="login_form_inner">
-                    <h3>Log in to enter</h3>
+                <div class="login_form_inner" style="padding-top: 50px !important">
+                    <h3>Register to enter</h3>
                     <form class="row login_form" method="POST" action="{{ route('register') }}"
                         id="contactForm" novalidate="novalidate">
                         @csrf
@@ -23,6 +23,18 @@
                                 autocomplete="name">
 
                             @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number"
+                                name="phone_number" value="{{ old('phone_number') }}" placeholder="Phone Number"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone Number'" required
+                                autocomplete="phone_number">
+
+                            @error('phone_number')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
