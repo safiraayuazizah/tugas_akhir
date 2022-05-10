@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,9 +30,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         return view('admin.about_us');
     })->name('about_us');
     Route::resource('courses', CourseController::class);
-    Route::get('/customers', function() {
-        return view('admin.customers.index');
-    })->name('customers');
+    Route::resource('customers', CustomerController::class);
     Route::get('/transactions', function() {
         return view('admin.transactions.index');
     })->name('transactions');

@@ -19,7 +19,7 @@
             </a>
         </li>
         <li class="nav-item {{ Request::segment(1) === 'customers' ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('customers') }}">
+            <a class="nav-link" href="{{ route('customers.index') }}">
                 <i class="icon-head menu-icon"></i>
                 <span class="menu-title">Data Customers</span>
             </a>
