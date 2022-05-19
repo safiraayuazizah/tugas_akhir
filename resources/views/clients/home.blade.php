@@ -217,7 +217,7 @@
                             </div>
                         </div>
                         <div class="prd-bottom">
-                            <a href="{{ route('shopping_carts.store', $course->id) }}"
+                            <a href="{{ route('shoppingCarts.store', $course->id) }}"
                                 class="social-info">
                                 <span class="ti-bag"></span>
                                 <p class="hover-text">add to cart</p>

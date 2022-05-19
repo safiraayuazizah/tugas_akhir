@@ -25,7 +25,7 @@
             </a>
         </li>
         <li class="nav-item {{ Request::segment(1) === 'transactions' ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('transactions') }}">
+            <a class="nav-link" href="{{ route('transactions.index') }}">
                 <i class="icon-paper menu-icon"></i>
                 <span class="menu-title">Data Transactions</span>
             </a>
