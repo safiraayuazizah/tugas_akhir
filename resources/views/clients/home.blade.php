@@ -193,8 +193,8 @@
         <div class="col-lg-6 text-center">
             <div class="section-title">
                 <h1>All Courses</h1>
-                <p>There are {{ $courses_total }} courses available! 
-                    Add to cart and checkout the courses you want. 
+                <p>There are {{ $courses_total }} courses available!
+                    Add to cart and checkout the courses you want.
                     You will get useful knowledge.</p>
             </div>
         </div>
@@ -211,11 +211,14 @@
                             <h6>{{ $course->title }}</h6>
                             <h6 class="text-muted">{{ $course->creator }}</h6>
                             <div class="price">
-                                <h5 style="color: #ffba00">Rp {{ number_format($course->price, 0, ',', '.') }}</h5>
+                                <h5 style="color: #ffba00">Rp
+                                    {{ number_format($course->price, 0, ',', '.') }}
+                                </h5>
                             </div>
                         </div>
                         <div class="prd-bottom">
-                            <a href="" class="social-info">
+                            <a href="{{ route('shopping_carts.store', $course->id) }}"
+                                class="social-info">
                                 <span class="ti-bag"></span>
                                 <p class="hover-text">add to cart</p>
                             </a>
@@ -232,3 +235,14 @@
 </section>
 <!-- end product Area -->
 @endsection
+
+@push('script')
+    <script>
+        var msg = '{{ Session::get('alert') }}';
+        var exist = '{{ Session::has('alert') }}';
+        if (exist) {
+            alert(msg);
+        }
+
+    </script>
+@endpush

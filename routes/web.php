@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ShoppingCartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ClientController::class, 'home'])->name('home');
 Route::get('/about-us', [ClientController::class, 'about_us'])->name('about-us');
 Route::get('/contact', [ClientController::class, 'contact'])->name('contact');
+Route::middleware(['auth'])->group(function () {
+    Route::resource('shopping_carts', ShoppingCartController::class)->only('index', 'destroy');
+    Route::get('shopping_carts/{course_id}', [ShoppingCartController::class, 'store'])->name('shopping_carts.store');
+});
 
 Auth::routes();
 
