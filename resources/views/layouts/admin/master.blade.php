@@ -21,6 +21,79 @@
         href="{{ asset('assets/skydash/css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('assets/skydash/images/favicon.png') }}" />
+    <style>
+        .content-wrapper {
+            background-color: #fffbf0 !important;
+        }
+
+        .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .count-indicator .count {
+            background: #f5b300 !important;
+        }
+
+        .sidebar .nav:not(.sub-menu) > .nav-item.active {
+            background: #f5b300 !important;
+        }
+
+        .sidebar .nav .nav-item.active > .nav-link {
+            background: #f5b300 !important;
+        }
+
+        .sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link, .sidebar .nav:not(.sub-menu) > .nav-item:hover[aria-expanded="true"] {
+            background: #f5b300 !important;
+        }
+
+        .footer {
+            background-color: #fffbf0 !important;
+        }
+
+        a {
+            color: #f5b300;
+        }
+
+        a:hover {
+            color: #dba000;
+        }
+
+        .text-primary {
+            color: #f5b300 !important;
+        }
+
+        .btn-primary {
+            background: #f5b300 !important;
+            border: 1px solid #f5b300;
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            border: 2px solid #ffd666;
+            font-weight: bold;
+        }
+
+        .btn-outline-primary {
+            border: 1px solid #f5b300;
+            color: #f5b300;
+            font-weight: bold;
+        }
+
+        .btn-outline-primary:hover {
+            background: #f5b300 !important;
+            border: 1px solid #ffd666;
+            font-weight: bold;
+        }
+
+        .btn-outline-danger {
+            border: 1px solid #FF784F;
+            color: #FF784F;
+            font-weight: bold;
+        }
+
+        .btn-outline-danger:hover {
+            background: #FF784F !important;
+            border: 1px solid #FF784F;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
