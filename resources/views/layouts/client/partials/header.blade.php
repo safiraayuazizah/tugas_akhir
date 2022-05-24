@@ -16,22 +16,51 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item {{ Request::segment(1) === null ? 'active' : '' }}"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-                        <li class="nav-item {{ Request::segment(1) === 'about-us' ? 'active' : '' }}"><a class="nav-link" href="{{ route('about-us') }}">About Us</a></li>
-                        <li class="nav-item {{ Request::segment(1) === 'contact' ? 'active' : '' }}"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
-                        <li class="nav-item">
-                            @auth
-                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                            @endauth
-                            @guest
-                                <a class="nav-link" href="{{ route('login') }}">Login</a>
-                            @endguest
+                        <li class="nav-item {{ Request::segment(1) === null ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
+                        <li class="nav-item {{ Request::segment(1) === 'about-us' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
+                        </li>
+                        <li class="nav-item {{ Request::segment(1) === 'contact' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('contact') }}">Contact</a>
+                        </li>
+                        @auth
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item my-2" href="{{ route('profile') }}">
+                                        My Profile
+                                    </a>
+                                    <a class="dropdown-item my-2" href="{{ route('enrolled_courses') }}">
+                                        Enrolled Courses
+                                    </a>
+                                    <a class="dropdown-item my-2" href="{{ route('history_purchases') }}">
+                                        History Purchase
+                                    </a>
+                                    <a class="dropdown-item my-2" href="{{ route('settings') }}">
+                                        Settings
+                                    </a>
+                                    <a class="dropdown-item my-2" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endauth
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            </li>
+                        @endguest
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item">
@@ -55,3 +84,9 @@
         </div>
     </div>
 </header>
+
+@push('style')
+    <style>
+
+    </style>
+@endpush

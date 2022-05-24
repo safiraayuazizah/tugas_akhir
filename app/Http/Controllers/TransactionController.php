@@ -44,7 +44,13 @@ class TransactionController extends Controller
 
         ShoppingCart::where('user_id', Auth::user()->id)->delete();
 
-        return redirect()->back()->with('alert', 'Pesanan Anda berhasil di checkout!');
+        return redirect()->route('confirmation', $transaction->id);
+    }
+
+    public function confirmation($id)
+    {
+        $data = Transaction::find($id);
+        return view('clients.confirmation', compact('data'));
     }
 
     /**

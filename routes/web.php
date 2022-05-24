@@ -26,6 +26,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('shoppingCarts/{course_id}', [ShoppingCartController::class, 'store'])->name('shoppingCarts.store');
     Route::get('shoppingCarts/{course_id}/destroy', [ShoppingCartController::class, 'destroy'])->name('shoppingCarts.destroy');
     Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
+    Route::get('/confirmation/{id}', [TransactionController::class, 'confirmation'])->name('confirmation');
+    Route::get('/profile', [ClientController::class, 'profile'])->name('profile');
+    Route::get('/enrolled_courses', [ClientController::class, 'enrolled_courses'])->name('enrolled_courses');
+    Route::get('/enrolled_courses/{id}', [ClientController::class, 'detail_enrolled_courses'])->name('detail_enrolled_courses');
+    Route::get('/history_purchases', [ClientController::class, 'history_purchases'])->name('history_purchases');
+    Route::get('/settings', [ClientController::class, 'settings'])->name('settings');
+    Route::put('/updateProfile', [CustomerController::class, 'update'])->name('updateProfile');
 });
 
 Auth::routes();
