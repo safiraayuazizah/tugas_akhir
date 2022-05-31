@@ -71,10 +71,10 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         if ($request->editPass) {
-            $user = User::find($id);
+            $user = User::find($request->id);
             $request->validate([
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);

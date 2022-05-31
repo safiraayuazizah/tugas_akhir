@@ -37,6 +37,7 @@
                                 name="password_confirmation" placeholder="Confirm Password" required>
                         </div>
                         <input type="hidden" value="true" name="editPass">
+                        <input type="hidden" value="{{ $customer->id }}" name="id">
                         <div class="d-flex mt-5">
                             <a href="{{ route('customers.index') }}"
                                 class="btn btn-outline-secondary me-2">Cancel</a>
