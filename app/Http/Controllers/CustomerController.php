@@ -71,10 +71,10 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $user = User::find(Auth::user()->id);
         if ($request->editPass) {
+            $user = User::find($id);
             $request->validate([
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
@@ -85,6 +85,7 @@ class CustomerController extends Controller
 
             return redirect()->route('customers.index');
         } else {
+            $user = User::find(Auth::user()->id);
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
