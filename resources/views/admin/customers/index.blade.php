@@ -25,16 +25,21 @@
                                     <th>Gender</th>
                                     <th>Phone Number</th>
                                     <th>Age</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($customers as $customer)
+                                @foreach($customers as $customer)
                                     <tr>
                                         <td>{{ $customer->name }}</td>
                                         <td>{{ $customer->email }}</td>
-                                        <td>{{ $customer->gender == null ? '-' : ($customer->gender == 'L' ? 'Laki-laki' : 'Perempuan') }}</td>
-                                        <td>{{ $customer->phone_number == null ? '-' : $customer->phone_number }}</td>
-                                        <td>{{ $customer->date_of_birth == null ? '-' : date_diff(date_create($customer->date_of_birth), date_create(date("Y-m-d")))->format('%y') . 'thn'  }}</td>
+                                        <td>{{ $customer->gender == null ? '-' : ($customer->gender == 'L' ? 'Laki-laki' : 'Perempuan') }}
+                                        </td>
+                                        <td>{{ $customer->phone_number == null ? '-' : $customer->phone_number }}
+                                        </td>
+                                        <td>{{ $customer->date_of_birth == null ? '-' : date_diff(date_create($customer->date_of_birth), date_create(date("Y-m-d")))->format('%y') . 'thn' }}
+                                        </td>
+                                        <td><a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-sm btn-outline-primary">Edit Password</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

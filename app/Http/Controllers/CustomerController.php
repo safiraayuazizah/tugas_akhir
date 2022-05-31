@@ -56,12 +56,13 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
+        $customer = User::find($id);
+        return view('admin.customers.edit', compact('customer'));
     }
 
     /**
@@ -73,20 +74,32 @@ class CustomerController extends Controller
     public function update(Request $request)
     {
         $user = User::find(Auth::user()->id);
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone_number' => $request->phone_number,
-            'date_of_birth' => $request->date_of_birth,
-        ]);
+        if ($request->editPass) {
+            $request->validate([
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
 
-        if ($request->password) {
             $user->update([
                 'password' => Hash::make($request->password),
             ]);
-        }
 
-        return redirect()->back()->with('alert', 'Profil berhasil diperbarui');
+            return redirect()->route('customers.index');
+        } else {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone_number' => $request->phone_number,
+                'date_of_birth' => $request->date_of_birth,
+            ]);
+
+            if ($request->password) {
+                $user->update([
+                    'password' => Hash::make($request->password),
+                ]);
+            }
+
+            return redirect()->back()->with('alert', 'Profil berhasil diperbarui');
+        }
     }
 
     /**
