@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Profile;
 use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -13,7 +14,12 @@ class ClientController extends Controller
     {
         $courses = Course::all();
         $courses_total = Course::count();
-        return view('clients.home', compact('courses', 'courses_total'));
+        $best_sellers = TransactionDetail::select('course_id', DB::raw('count(*) as total'))
+                        ->groupBy('course_id')
+                        ->orderByDesc('total')
+                        ->take(4)
+                        ->get();
+        return view('clients.home', compact('courses', 'courses_total', 'best_sellers'));
     }
 
     public function about_us()
