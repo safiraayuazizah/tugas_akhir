@@ -91,6 +91,7 @@ class CustomerController extends Controller
                 'email' => $request->email,
                 'phone_number' => $request->phone_number,
                 'date_of_birth' => $request->date_of_birth,
+                'gender' => $request->gender,
             ]);
 
             if ($request->password) {
