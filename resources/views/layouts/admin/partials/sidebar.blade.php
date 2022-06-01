@@ -7,7 +7,7 @@
             </a>
         </li>
         <li class="nav-item {{ Request::segment(1) === 'about_us' ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('about_us') }}">
+            <a class="nav-link" href="{{ route('about_us.index') }}">
                 <i class="icon-heart menu-icon"></i>
                 <span class="menu-title">About Us</span>
             </a>

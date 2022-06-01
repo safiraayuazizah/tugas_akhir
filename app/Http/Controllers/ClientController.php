@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Profile;
 use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,8 @@ class ClientController extends Controller
 
     public function about_us()
     {
-        return view('clients.about_us');
+        $profile = Profile::first();
+        return view('clients.about_us', compact('profile'));
     }
 
     public function contact()

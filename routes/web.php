@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -41,9 +42,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', function() {
         return view('admin.dashboard');
     })->name('dashboard');
-    Route::get('/about_us', function() {
-        return view('admin.about_us');
-    })->name('about_us');
+    Route::resource('about_us', ProfileController::class)->only('index', 'store', 'update');
     Route::resource('courses', CourseController::class);
     Route::resource('customers', CustomerController::class);
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
