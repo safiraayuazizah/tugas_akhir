@@ -7,6 +7,7 @@ use App\Models\Profile;
 use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ClientController extends Controller
 {
@@ -48,6 +49,12 @@ class ClientController extends Controller
     {
         $data = Course::find($id);
         return view('clients.detail_enrolled_course', compact('data'));
+    }
+
+    public function downloadVideo($id)
+    {
+        $data = Course::find($id);
+        return response()->download(storage_path('app/public/'. $data->video));
     }
 
     public function history_purchases()
