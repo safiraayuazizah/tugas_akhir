@@ -25,6 +25,11 @@
         <div class="row">
             <div class="col-lg-12 posts-list">
                 <div class="single-post row">
+                <div class="col-lg-12">
+                        <div class="feature-img">
+                            <img class="img-fluid" src="{{ asset('assets/karma/images/blog/Peneleh.jpg') }}" alt="">
+                        </div>
+                    </div>
                     <div class="col-lg-12 col-md-12 blog_details">
                         {!! $profile->content !!}
                     </div>

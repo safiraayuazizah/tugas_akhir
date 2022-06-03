@@ -41,9 +41,7 @@
                                     <a class="dropdown-item my-2" href="{{ route('history_purchases') }}">
                                         History Purchase
                                     </a>
-                                    <a class="dropdown-item my-2" href="{{ route('settings') }}">
-                                        Settings
-                                    </a>
+                                  
                                     <a class="dropdown-item my-2" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

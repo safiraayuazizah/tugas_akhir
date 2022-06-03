@@ -11,18 +11,16 @@
                         <img class="img-fluid" src="{{ asset('images/logo-complete.png') }}"
                             alt="logo" width="500px">
                         <div class="banner-content mt-5">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et
-                                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                           
                             <div class="add-bag d-flex align-items-center">
-                                <a href="#" class="primary-btn">Get Started</a>
+                                <a href="#" class="primary-btn">Daftar Sekarang!</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-7">
                         <div class="banner-img d-flex justify-content-end">
                             <img class="img-fluid" src="{{ asset('images/illustration.png') }}"
-                                alt="illustration" width="400px">
+                                alt="illustration" width="350px">
                         </div>
                     </div>
                 </div>
@@ -39,10 +37,8 @@
             <div class="col-lg-6 text-center">
                 <div class="section-title">
                     <h1>Best Seller</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et
-                        dolore
-                        magna aliqua.</p>
+                    <p>There are the best-selling courses!
+                    </p>
                 </div>
             </div>
         </div>
@@ -54,7 +50,7 @@
                     <img class="img-fluid"
                         src="{{ asset('storage/' . $bs->course->thumbnail) }}" alt="">
                     <div class="product-details">
-                        <div style="height: 100px !important">
+                        <div style="height: 150px !important">
                             <h6>{{ $bs->course->title }}</h6>
                             <h6 class="text-muted">{{ $bs->course->creator }}</h6>
                             <div class="price">

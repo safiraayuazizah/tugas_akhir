@@ -59,7 +59,11 @@
                 <dt class="col-sm-3" style="font-size: 16px">Age</dt>
                 <dd class="col-sm-9" style="font-size: 16px">{{ Auth::user()->date_of_birth == null ? '-' : date_diff(date_create(Auth::user()->date_of_birth), date_create(date("Y-m-d")))->format('%y') . ' tahun'  }}</dd>
             </dl>
+            <div class="checkout_btn_inner d-flex justify-content-end align-items-center">
+                                            <button type="submit" class="primary-btn" href="{{ route('settings') }}" style="border: none">Edit My Profile</button>
+                                        </div>
         </div>
+        
     </div>
 </div>
 @endsection
