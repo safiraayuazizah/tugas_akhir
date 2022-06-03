@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Profile;
+use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -59,7 +60,14 @@ class ClientController extends Controller
 
     public function history_purchases()
     {
-        return view('clients.history_purchases');
+        $transactions = Transaction::where('user_id', Auth::user()->id)->orderByDesc('created_at')->get();
+        return view('clients.history_purchases', compact('transactions'));
+    }
+
+    public function history_purchases_detail($id)
+    {
+        $data = Transaction::find($id);
+        return view('clients.detail_history_purchases', compact('data'));
     }
 
     public function settings()
