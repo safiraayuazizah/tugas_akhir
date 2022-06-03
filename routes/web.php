@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\TransactionController;
@@ -40,9 +41,7 @@ Route::middleware(['auth'])->group(function () {
 Auth::routes();
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/dashboard', function() {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('about_us', ProfileController::class)->only('index', 'store', 'update');
     Route::resource('courses', CourseController::class);
     Route::resource('customers', CustomerController::class);
