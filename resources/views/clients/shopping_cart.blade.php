@@ -35,6 +35,13 @@
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
+                        <div class="section-title">
+                <h1>Warning!</h1>
+                <p>Sebeleum melakukan checkout
+                    customer harap cek ulang video yang akan dibeli
+                    agar tidak terjadi kesalahan pembelian video!
+                </p>
+            </div>
                             <tr>
                                 <th scope="col">Courses</th>
                                 <th scope="col" style="width: 144px">Price</th>

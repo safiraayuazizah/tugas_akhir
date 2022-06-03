@@ -13,7 +13,7 @@
                         <div class="banner-content mt-5">
                            
                             <div class="add-bag d-flex align-items-center">
-                                <a href="#" class="primary-btn">Daftar Sekarang!</a>
+                                <a href="{{ route('register') }}" class="primary-btn">Daftar Sekarang!</a>
                             </div>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                     <img class="img-fluid"
                         src="{{ asset('storage/' . $course->thumbnail) }}" alt="">
                     <div class="product-details">
-                        <div style="height: 100px !important">
+                        <div style="height: 150px !important">
                             <h6>{{ $course->title }}</h6>
                             <h6 class="text-muted">{{ $course->creator }}</h6>
                             <div class="price">
