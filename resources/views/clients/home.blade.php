@@ -11,10 +11,14 @@
                         <img class="img-fluid" src="{{ asset('images/logo-complete.png') }}"
                             alt="logo" width="500px">
                         <div class="banner-content mt-5">
-                           
-                            <div class="add-bag d-flex align-items-center">
-                                <a href="{{ route('register') }}" class="primary-btn">Daftar Sekarang!</a>
-                            </div>
+                            @auth
+                                <h1 class="text-white" style="width: 150%; max-width: 150%">Selamat Datang {{ Auth::user()->name }}</h1>
+                            @endauth
+                            @guest
+                                <div class="add-bag d-flex align-items-center">
+                                    <a href="{{ route('register') }}" class="primary-btn">Daftar Sekarang!</a>
+                                </div>
+                            @endguest
                         </div>
                     </div>
                     <div class="col-lg-7">
