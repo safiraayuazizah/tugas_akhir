@@ -14,7 +14,7 @@ class Transaction extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'total', 'status'];
+    protected $fillable = ['user_id', 'total', 'status', 'expired_date'];
 
     /**
      * Get the customer that owns the Transaction

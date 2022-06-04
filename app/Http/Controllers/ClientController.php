@@ -6,9 +6,11 @@ use App\Models\Course;
 use App\Models\Profile;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use SebastianBergmann\Diff\Diff;
 
 class ClientController extends Controller
 {
@@ -41,15 +43,27 @@ class ClientController extends Controller
     }
 
     public function enrolled_courses()
-    {
-        $data = TransactionDetail::whereRelation('transaction', 'user_id', Auth::user()->id)->whereRelation('transaction', 'status', 'completed')->with('transaction', 'course')->get();
+    {   
+        $data = TransactionDetail::whereRelation('transaction', 'user_id', Auth::user()->id)
+                                    ->whereRelation('transaction', 'status', 'completed')
+                                    ->whereRelation('transaction', 'expired_date', '>=', Carbon::today())
+                                    ->with('transaction', 'course')
+                                    ->get();
         return view('clients.enrolled_courses', compact('data'));
     }
 
     public function detail_enrolled_courses($id)
     {
-        $data = Course::find($id);
-        return view('clients.detail_enrolled_course', compact('data'));
+        $data = TransactionDetail::where('course_id', $id)
+                                    ->whereRelation('transaction', 'user_id', Auth::user()->id)
+                                    ->whereRelation('transaction', 'status', 'completed')
+                                    ->with('transaction', 'course')
+                                    ->first();
+        $expired_date = Carbon::createFromFormat('Y-m-d', $data->transaction->expired_date);
+        $now = Carbon::today();
+        $diff = $expired_date >= $now ? $expired_date->diffInDays($now, true) : 0;
+                                    
+        return view('clients.detail_enrolled_course', compact('data', 'diff'));
     }
 
     public function downloadVideo($id)

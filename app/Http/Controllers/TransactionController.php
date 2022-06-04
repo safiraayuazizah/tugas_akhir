@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ShoppingCart;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,6 +34,7 @@ class TransactionController extends Controller
             'user_id' => Auth::user()->id,
             'total' => $request->total,
             'status' => 'pending',
+            'expired_date' => Carbon::today()->add(30, 'day'),
         ]);
 
         foreach ($request->courses as $course) {
