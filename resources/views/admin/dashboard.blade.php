@@ -63,7 +63,15 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title mb-0">Top Courses</p>
+                    <div class="d-flex justify-content-between">
+                        <p class="card-title mb-0">Top Courses</p>
+                        <select name="range" id="range" class="form-select" style="width: 150px">
+                            <option value="all">All</option>
+                            <option value="today">Today</option>
+                            <option value="week">Last 7 day</option>
+                            <option value="month">Last 30 day</option>
+                        </select>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-borderless">
                             <thead>
@@ -73,12 +81,13 @@
                                     <th>Price</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($top_course as $item)
+                            <tbody id="top_courses">
+                                @foreach($top_course as $item)
                                     <tr>
                                         <td>{!! wordwrap($item->course->title, 110, "<br>\n") !!}</td>
                                         <td class="font-weight-bold">{{ $item->course->creator }}</td>
-                                        <td>{{ 'Rp ' . number_format($item->course->price, 0, ',', '.') }}</td>
+                                        <td>{{ 'Rp ' . number_format($item->course->price, 0, ',', '.') }}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -92,16 +101,40 @@
 @endsection
 
 @push('style')
-    <link rel="stylesheet" href="{{ asset('assets/skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/skydash/vendors/ti-icons/css/themify-icons.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/skydash/js/select.dataTables.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/skydash/vendors/ti-icons/css/themify-icons.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('assets/skydash/js/select.dataTables.min.css') }}">
 @endpush
 
 @push('script')
     <script src="{{ asset('assets/skydash/vendors/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('assets/skydash/vendors/datatables.net/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('assets/skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('assets/skydash/vendors/datatables.net/jquery.dataTables.js') }}">
+    </script>
+    <script
+        src="{{ asset('assets/skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}">
+    </script>
     <script src="{{ asset('assets/skydash/js/dataTables.select.min.js') }}"></script>
     <script src="{{ asset('assets/skydash/js/dashboard.js') }}"></script>
     <script src="{{ asset('assets/skydash/js/Chart.roundedBarCharts.js') }}"></script>
+    <script>
+        $(function () {
+            $("#range").change(function () {
+                let value = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route("filter_top_courses") }}',
+                    data: {'filter': value},
+                    // dataType: 'json',
+                    success: function (data) {
+                        $('#top_courses').html(data);
+                        console.log(data);
+                    }
+                });
+            });
+        });
+
+    </script>
 @endpush

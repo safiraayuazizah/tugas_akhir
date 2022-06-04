@@ -43,6 +43,7 @@ Auth::routes();
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/filter_top_courses', [DashboardController::class, 'filterTopCourses'])->name('filter_top_courses');
     Route::resource('about_us', ProfileController::class)->only('index', 'store', 'update');
     Route::resource('courses', CourseController::class);
     Route::resource('customers', CustomerController::class);

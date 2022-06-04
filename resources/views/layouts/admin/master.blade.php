@@ -120,6 +120,7 @@
 
     <!-- plugins:js -->
     <script src="{{ asset('assets/skydash/vendors/js/vendor.bundle.base.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <!-- endinject -->
     <!-- inject:js -->
     <script src="{{ asset('assets/skydash/js/off-canvas.js') }}"></script>
