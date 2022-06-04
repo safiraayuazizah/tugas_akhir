@@ -26,8 +26,16 @@
         <div class="col">
             <div class="card shadow border-none">
                 <div class="card-body">
+                    <div class="card-title">Active Enrolled Courses</div>
+                    <h1>{{ $active_courses }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card shadow border-none">
+                <div class="card-body">
                     <div class="card-title">Total Enrolled Courses</div>
-                    <h1>5</h1>
+                    <h1>{{ $enrolled_courses }}</h1>
                 </div>
             </div>
         </div>
@@ -35,7 +43,7 @@
             <div class="card shadow border-none">
                 <div class="card-body">
                     <div class="card-title">Total Transactions</div>
-                    <h1>4</h1>
+                    <h1>{{ $transactions }}</h1>
                 </div>
             </div>
         </div>

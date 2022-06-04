@@ -39,7 +39,17 @@ class ClientController extends Controller
 
     public function profile()
     {
-        return view('clients.profile');
+        $active_courses = TransactionDetail::whereRelation('transaction', 'user_id', Auth::user()->id)
+                                    ->whereRelation('transaction', 'status', 'completed')
+                                    ->whereRelation('transaction', 'expired_date', '>=', Carbon::today())
+                                    ->count();
+        $enrolled_courses = TransactionDetail::whereRelation('transaction', 'user_id', Auth::user()->id)
+                                    ->whereRelation('transaction', 'status', 'completed')
+                                    ->count();
+        $transactions = Transaction::where('status', 'completed')
+                                    ->where('user_id', Auth::user()->id)
+                                    ->count();
+        return view('clients.profile', compact('active_courses', 'enrolled_courses', 'transactions'));
     }
 
     public function enrolled_courses()
