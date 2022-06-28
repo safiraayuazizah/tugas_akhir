@@ -9,8 +9,6 @@ use App\Models\TransactionDetail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use SebastianBergmann\Diff\Diff;
 
 class ClientController extends Controller
 {
@@ -19,10 +17,10 @@ class ClientController extends Controller
         $courses = Course::all();
         $courses_total = Course::count();
         $best_sellers = TransactionDetail::select('course_id', DB::raw('count(*) as total'))
-                        ->groupBy('course_id')
-                        ->orderByDesc('total')
-                        ->take(4)
-                        ->get();
+            ->groupBy('course_id')
+            ->orderByDesc('total')
+            ->take(4)
+            ->get();
         return view('clients.home', compact('courses', 'courses_total', 'best_sellers'));
     }
 
@@ -40,46 +38,46 @@ class ClientController extends Controller
     public function profile()
     {
         $active_courses = TransactionDetail::whereRelation('transaction', 'user_id', Auth::user()->id)
-                                    ->whereRelation('transaction', 'status', 'completed')
-                                    ->whereRelation('transaction', 'expired_date', '>=', Carbon::today())
-                                    ->count();
+            ->whereRelation('transaction', 'status', 'sukses')
+            ->whereRelation('transaction', 'expired_date', '>=', Carbon::today())
+            ->count();
         $enrolled_courses = TransactionDetail::whereRelation('transaction', 'user_id', Auth::user()->id)
-                                    ->whereRelation('transaction', 'status', 'completed')
-                                    ->count();
-        $transactions = Transaction::where('status', 'completed')
-                                    ->where('user_id', Auth::user()->id)
-                                    ->count();
+            ->whereRelation('transaction', 'status', 'sukses')
+            ->count();
+        $transactions = Transaction::where('status', 'sukses')
+            ->where('user_id', Auth::user()->id)
+            ->count();
         return view('clients.profile', compact('active_courses', 'enrolled_courses', 'transactions'));
     }
 
     public function enrolled_courses()
-    {   
+    {
         $data = TransactionDetail::whereRelation('transaction', 'user_id', Auth::user()->id)
-                                    ->whereRelation('transaction', 'status', 'completed')
-                                    ->whereRelation('transaction', 'expired_date', '>=', Carbon::today())
-                                    ->with('transaction', 'course')
-                                    ->get();
+            ->whereRelation('transaction', 'status', 'sukses')
+            ->whereRelation('transaction', 'expired_date', '>=', Carbon::today())
+            ->with('transaction', 'course')
+            ->get();
         return view('clients.enrolled_courses', compact('data'));
     }
 
     public function detail_enrolled_courses($id)
     {
         $data = TransactionDetail::where('course_id', $id)
-                                    ->whereRelation('transaction', 'user_id', Auth::user()->id)
-                                    ->whereRelation('transaction', 'status', 'completed')
-                                    ->with('transaction', 'course')
-                                    ->first();
+            ->whereRelation('transaction', 'user_id', Auth::user()->id)
+            ->whereRelation('transaction', 'status', 'sukses')
+            ->with('transaction', 'course')
+            ->first();
         $expired_date = Carbon::createFromFormat('Y-m-d', $data->transaction->expired_date);
         $now = Carbon::today();
         $diff = $expired_date >= $now ? $expired_date->diffInDays($now, true) : 0;
-                                    
+
         return view('clients.detail_enrolled_course', compact('data', 'diff'));
     }
 
     public function downloadVideo($id)
     {
         $data = Course::find($id);
-        return response()->download(storage_path('app/public/'. $data->video));
+        return response()->download(storage_path('app/public/' . $data->video));
     }
 
     public function history_purchases()

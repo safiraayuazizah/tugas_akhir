@@ -52,7 +52,53 @@ class TransactionController extends Controller
     public function confirmation($id)
     {
         $data = Transaction::find($id);
-        return view('clients.confirmation', compact('data'));
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-XfCCy1VM3TBeutMteqli_OlH';
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+        
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $data->id,
+                'gross_amount' => 10000,
+            ),
+            'item_details' => array(),
+            'customer_details' => array(
+                'first_name' => Auth::user()->name,
+                'last_name' => '',
+                'email' => Auth::user()->email,
+                'phone' => Auth::user()->phone_number,
+            ),
+        );
+
+        foreach ($data->transactions as $item) {
+            $params['item_details'][] = array(
+                'id' => $item->id,
+                'price' => (int) $item->course->price,
+                'quantity' => 1,
+                'name' => $item->course->title,
+            );
+        }
+
+        // dd($data->transactions);
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        return view('clients.confirmation', ['data' => $data, 'snapToken' => $snapToken]);
+    }
+
+    public function submit_midtrans(Request $request)
+    {
+        $json = json_decode($request->get('json'));
+        
+        $transaction_update= Transaction::where('id',$json->order_id)->first();
+        $transaction_update->status='sukses';
+        $transaction_update->pdf_url=$json->pdf_url;
+        $transaction_update->save();
+
+        return redirect()->route('history_purchases');
     }
 
     /**
@@ -76,7 +122,7 @@ class TransactionController extends Controller
     public function update($id, $status)
     {
         Transaction::where('id', $id)->update([
-            'status' => $status
+            'status' => $status,
         ]);
 
         return redirect()->back();

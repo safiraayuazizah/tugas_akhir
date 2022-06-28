@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/history_purchases/detail/{id}', [ClientController::class, 'history_purchases_detail'])->name('history_purchases_detail');
     Route::get('/settings', [ClientController::class, 'settings'])->name('settings');
     Route::put('/updateProfile', [CustomerController::class, 'update'])->name('updateProfile');
+    Route::get('/confirmation', [TransactionController::class, 'payment']);
+    Route::get('/payment', [TransactionController::class, 'payment']);
+    Route::post('/submit_midtrans', [TransactionController::class, 'submit_midtrans'])->name('submit_midtrans');
 });
 
 Auth::routes();

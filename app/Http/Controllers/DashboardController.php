@@ -15,8 +15,8 @@ class DashboardController extends Controller
     public function index()
     {
 
-        $transaction_today_count = Transaction::where('status', 'completed')->whereDate('created_at', Carbon::today())->count();
-        $transaction_count = Transaction::where('status', 'completed')->count();
+        $transaction_today_count = Transaction::where('status', 'sukses')->whereDate('created_at', Carbon::today())->count();
+        $transaction_count = Transaction::where('status', 'sukses')->count();
         $course_count = Course::count();
         $customer_count = User::where('role', 'customer')->count();
         $top_course = TransactionDetail::select('course_id', DB::raw('count(*) as total'))

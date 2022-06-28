@@ -43,7 +43,7 @@
                                         <td>{{ date('d M Y', strtotime($transaction->created_at)); }}</td>
                                         <td>{{ 'Rp ' . number_format($transaction->total, 0, ',', '.') }}</td>
                                         <td>
-                                            <div class="{{ $transaction->status == 'pending' ? 'badge badge-warning' : ($transaction->status == 'completed' ? 'badge badge-success' : 'badge badge-danger') }} text-capitalize">{{ $transaction->status }}</div>
+                                            <div class="{{ $transaction->status == 'pending' ? 'badge badge-warning' : ($transaction->status == 'completed' ? 'badge badge-success' : 'badge badge-success') }} text-capitalize">{{ $transaction->status }}</div>
                                         </td>
                                         <td><a href="{{ route('history_purchases_detail', $transaction->id) }}">View Detail</a></td>
                                     </tr>

@@ -35,11 +35,14 @@
                         <li>
                           <a href="#">
                             <span>Status</span> : 
-                            <div class="{{ $data->status == 'pending' ? 'badge badge-warning' : ($data->status == 'completed' ? 'badge badge-success' : 'badge badge-danger') }} text-capitalize">
+                            <div class="{{ $data->status == 'pending' ? 'badge badge-warning' : ($data->status == 'completed' ? 'badge badge-success' : 'badge badge-success') }} text-capitalize">
                               {{ $data->status }}
                             </div>
                           </a>
                         </li>
+                        <?php if(!@empty($data->pdf_url)){ ?>
+                        <li><a href="#"><span>Invoice</span> : <a href="{{$data->pdf_url}}" target="_blank"> Link Invoice</a></li>
+                        <?php }?>
                     </ul>
                 </div>
             </div>

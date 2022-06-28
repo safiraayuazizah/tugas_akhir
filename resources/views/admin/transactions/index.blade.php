@@ -15,7 +15,7 @@
                                     <th>Date</th>
                                     <th>Total</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                  
                                 </tr>
                             </thead>
                             <tbody>
@@ -27,13 +27,7 @@
                                         <td class="font-weight-medium">
                                             <div class="{{ $transaction->status == 'pending' ? 'badge badge-warning' : ($transaction->status == 'completed' ? 'badge badge-success' : 'badge badge-danger') }} text-capitalize">{{ $transaction->status }}</div>
                                         </td>
-                                        <td>
-                                            <a href="#" title="View detail transaction" class="text-primary me-2" style="text-decoration: none">View</a>
-                                            @if ($transaction->status == 'pending')
-                                                <a href="{{ route('transactions.update', [$transaction->id, 'completed']) }}" title="Accept transaction" class="text-primary me-2" style="text-decoration: none">Accept</a>
-                                                <a href="{{ route('transactions.update', [$transaction->id, 'failed']) }}" title="Reject transaction" class="text-primary me-2" style="text-decoration: none">Reject</a>  
-                                            @endif
-                                        </td>
+                                        
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -8,7 +8,7 @@
             <div class="col-first">
                 <img class="img-fluid" src="{{ asset('images/logo-complete.png') }}" alt="logo"
                     width="350px">
-                <h1 class="mt-4">About Us</h1>
+                <h1 class="mt-4">Contact</h1>
             </div>
             <div class="col-second">
                 <div class="banner-img">
@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-9">
+            <!-- <div class="col-lg-9">
                 <form class="row contact_form" action="contact_process.php" method="post" id="contactForm"
                     novalidate="novalidate">
                     <div class="col-md-6">
@@ -78,7 +78,7 @@
                         <button type="submit" value="submit" class="primary-btn">Send Message</button>
                     </div>
                 </form>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
